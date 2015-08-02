@@ -5,6 +5,7 @@ import static com.mistno.minewrap.State.RUN;
 import java.io.IOException;
 
 import com.mistno.minewrap.*;
+import com.mistno.minewrap.config.Config;
 
 public class OverrideBackup extends AbstractBackup{
 

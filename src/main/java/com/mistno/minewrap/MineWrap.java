@@ -9,6 +9,7 @@ import java.util.concurrent.*;
 import org.joda.time.*;
 
 import com.mistno.minewrap.backup.*;
+import com.mistno.minewrap.config.Config;
 
 public class MineWrap {
 

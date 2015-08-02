@@ -7,6 +7,7 @@ import java.text.DateFormat;
 import java.util.Date;
 
 import com.mistno.minewrap.*;
+import com.mistno.minewrap.config.Config;
 
 public class SevenZipBackup extends AbstractBackup{
 	
