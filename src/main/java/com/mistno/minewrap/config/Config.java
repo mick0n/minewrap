@@ -16,8 +16,9 @@ public class Config {
 		validateSingleProperty("server.jar");
 		validateSingleProperty("server.xmx");
 		validateSingleProperty("server.xms");
-		validateSingleProperty("backup.sourceDir");
-		validateSingleProperty("backup.targetDir");
+		validateSinglePropertyWithDependency("backup.7zip.sourceDir", "backup.7zip.enabled", "true");
+		validateSinglePropertyWithDependency("backup.7zip.targetDir", "backup.7zip.enabled", "true");
+		validateSinglePropertyWithDependency("backup.external.path", "backup.external.enabled", "true");
 	}
 
 	private static void validateSingleProperty(String key) {
@@ -30,7 +31,7 @@ public class Config {
 	}
 	
 	private static void validateSinglePropertyWithDependency(String key, String depenentOnKey, String dependentOnValue) {
-		if(contains(depenentOnKey) && properties.getProperty(key).equals(dependentOnValue)) {
+		if(contains(depenentOnKey) && properties.getProperty(depenentOnKey).equalsIgnoreCase(dependentOnValue)) {
 			validateSingleProperty(key);
 		}
 	}

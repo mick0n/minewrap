@@ -35,7 +35,8 @@ public class ServerInputTask implements Runnable {
 				process.writer().write(input + "\n");
 				process.writer().flush();
 			}catch (IOException e) {
-				System.err.println("Error when writing command to minecraft: " + e.getMessage());
+				System.err.println("Error when writing command to minecraft");
+				e.printStackTrace();
 			}
 		}
 	}

@@ -7,16 +7,21 @@ import com.mistno.minewrap.config.Config;
 
 public class ConfigTest {
 
+	private static final String RANDOM_STRING = "bivNPiEWgf";
+	
 	@Rule
 	public ExpectedException expectedException = ExpectedException.none();
 
 	@Before
-	public void setup() {
-		Config.properties.setProperty("server.jar", "randomValue");
-		Config.properties.setProperty("server.xmx", "randomValue");
-		Config.properties.setProperty("server.xms", "randomValue");
-		Config.properties.setProperty("backup.sourceDir", "randomValue");
-		Config.properties.setProperty("backup.targetDir", "randomValue");
+	public void setupDefaults() {
+		Config.properties.setProperty("server.jar", RANDOM_STRING);
+		Config.properties.setProperty("server.xmx", RANDOM_STRING);
+		Config.properties.setProperty("server.xms", RANDOM_STRING);
+		Config.properties.setProperty("backup.7zip.enabled", "true");
+		Config.properties.setProperty("backup.7zip.sourceDir", RANDOM_STRING);
+		Config.properties.setProperty("backup.7zip.targetDir", RANDOM_STRING);
+		Config.properties.setProperty("backup.external.enabled", "false");
+		Config.properties.setProperty("backup.external.path", "");
 	}
 
 	@Test
@@ -41,7 +46,23 @@ public class ConfigTest {
 		Config.properties.setProperty("server.jar", "");
 		Config.validateProperties();
 	}
+	
+	@Test
+	public void ignorePropertyIfDependentPropertyIsMissing() {
+		Config.properties.setProperty("backup.7zip.enabled", "");
+		Config.properties.remove("backup.7zip.sourceDir");
+		Config.validateProperties();
+	}
 
+	@Test
+	public void missingPropertyWithFulfilledDependencyThrowsException() {
+		expectedException.expect(IllegalArgumentException.class);
+		expectedException.expectMessage("Missing the following property in minewrap.properties: backup.7zip.sourceDir");
+
+		Config.properties.remove("backup.7zip.sourceDir");
+		Config.validateProperties();
+	}
+	
 	@After
 	public void teardown() {
 		Config.properties.clear();

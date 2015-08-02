@@ -19,14 +19,15 @@ public class OverrideBackup extends AbstractBackup{
 	public void performBackup() {
 		try {
 			System.out.println("Backup process started...");
-			new ProcessBuilder(Config.get("backup.script"))
+			new ProcessBuilder(Config.get("backup.external.path"))
 				.inheritIO()
 				.start()
 				.waitFor();
 			stateHolder.setState(RUN);
 			System.out.println("Backup process finished.");
 		} catch (IOException | InterruptedException e) {
-			System.err.println("Error running overrided backup script: " + e.getMessage());
+			System.err.println("Error running overrided backup script");
+			e.printStackTrace();
 		}
 	}
 	

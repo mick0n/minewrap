@@ -22,10 +22,10 @@ public class SevenZipBackup extends AbstractBackup{
 		System.out.println("Backup process started...");
 
 		String dateTimeString = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(new Date()).replace(":", "").replace(" ", "_").replace("-", "");
-		File target = new File(Config.get("backup.targetDir") + "/minewrap_backup_" + dateTimeString + ".7z");
-		File source = new File(Config.get("backup.sourceDir"));
+		File target = new File(Config.get("backup.7zip.targetDir") + "/minewrap_backup_" + dateTimeString + ".7z");
+		File source = new File(Config.get("backup.7zip.sourceDir"));
 		if (!source.exists() || !source.isDirectory()) {
-			System.err.println("backup.sourceDir didn't exist or wasn't a directory, aborting backup process!");
+			System.err.println(Config.get("backup.7zip.sourceDir") + " didn't exist or wasn't a directory, aborting backup process!");
 			stateHolder.setState(END);
 			return;
 		}
