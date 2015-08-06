@@ -16,8 +16,9 @@ public class Config {
 		validateSingleProperty("server.jar");
 		validateSingleProperty("server.xmx");
 		validateSingleProperty("server.xms");
-		validateSinglePropertyWithDependency("backup.7zip.sourceDir", "backup.7zip.enabled", "true");
-		validateSinglePropertyWithDependency("backup.7zip.targetDir", "backup.7zip.enabled", "true");
+		validateSinglePropertyWithDependency("backup.zip.sourceDir", "backup.zip.enabled", "true");
+		validateSinglePropertyWithDependency("backup.zip.targetDir", "backup.zip.enabled", "true");
+		validateSinglePropertyWithDependency("backup.zip.exclude", "backup.zip.enabled", "true");
 		validateSinglePropertyWithDependency("backup.external.path", "backup.external.enabled", "true");
 	}
 

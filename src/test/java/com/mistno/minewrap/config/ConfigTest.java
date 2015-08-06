@@ -17,9 +17,10 @@ public class ConfigTest {
 		Config.properties.setProperty("server.jar", RANDOM_STRING);
 		Config.properties.setProperty("server.xmx", RANDOM_STRING);
 		Config.properties.setProperty("server.xms", RANDOM_STRING);
-		Config.properties.setProperty("backup.7zip.enabled", "true");
-		Config.properties.setProperty("backup.7zip.sourceDir", RANDOM_STRING);
-		Config.properties.setProperty("backup.7zip.targetDir", RANDOM_STRING);
+		Config.properties.setProperty("backup.zip.enabled", "true");
+		Config.properties.setProperty("backup.zip.sourceDir", RANDOM_STRING);
+		Config.properties.setProperty("backup.zip.exclude", RANDOM_STRING);
+		Config.properties.setProperty("backup.zip.targetDir", RANDOM_STRING);
 		Config.properties.setProperty("backup.external.enabled", "false");
 		Config.properties.setProperty("backup.external.path", "");
 	}
@@ -49,17 +50,17 @@ public class ConfigTest {
 	
 	@Test
 	public void ignorePropertyIfDependentPropertyIsMissing() {
-		Config.properties.setProperty("backup.7zip.enabled", "");
-		Config.properties.remove("backup.7zip.sourceDir");
+		Config.properties.setProperty("backup.zip.enabled", "");
+		Config.properties.remove("backup.zip.sourceDir");
 		Config.validateProperties();
 	}
 
 	@Test
 	public void missingPropertyWithFulfilledDependencyThrowsException() {
 		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("Missing the following property in minewrap.properties: backup.7zip.sourceDir");
+		expectedException.expectMessage("Missing the following property in minewrap.properties: backup.zip.sourceDir");
 
-		Config.properties.remove("backup.7zip.sourceDir");
+		Config.properties.remove("backup.zip.sourceDir");
 		Config.validateProperties();
 	}
 	

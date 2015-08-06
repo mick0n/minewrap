@@ -40,8 +40,8 @@ public class MineWrap {
 				}
 				break;
 			case BACKUP:
-				if (Config.contains("backup.7zip.enabled") && Config.get("backup.7zip.enabled").equalsIgnoreCase("true")) {
-					new SevenZipBackup(stateHolder).performBackup();
+				if (Config.contains("backup.zip.enabled") && Config.get("backup.zip.enabled").equalsIgnoreCase("true")) {
+					new ZipBackup(stateHolder).performBackup();
 				}
 				if (Config.contains("backup.external.enabled") && Config.get("backup.external.enabled").equalsIgnoreCase("true")) {
 					new OverrideBackup(stateHolder).performBackup();
