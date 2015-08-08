@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.mistno</groupId>
 	<artifactId>minewrap</artifactId>
-	<version>0.7.1</version>
+	<version>0.8.0</version>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
