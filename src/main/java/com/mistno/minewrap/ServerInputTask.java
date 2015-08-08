@@ -1,6 +1,6 @@
 package com.mistno.minewrap;
 
-import static com.mistno.minewrap.State.END;
+import static com.mistno.minewrap.State.*;
 
 import java.io.*;
 
@@ -30,10 +30,13 @@ public class ServerInputTask implements Runnable {
 				String input = reader.readLine();
 				if(input.equalsIgnoreCase("stop")) {
 					stateHolder.setState(END);
+				}else if(input.equalsIgnoreCase("test")) {
+					write("stop");
+					stateHolder.setState(BACKUP);
+					return;
 				}
 			
-				process.writer().write(input + "\n");
-				process.writer().flush();
+				write(input);
 			}catch (IOException e) {
 				System.err.println("Error when writing command to minecraft");
 				e.printStackTrace();
@@ -41,4 +44,8 @@ public class ServerInputTask implements Runnable {
 		}
 	}
 	
+	private void write(String input) throws IOException{
+		process.writer().write(input + "\n");
+		process.writer().flush();
+	}
 }
