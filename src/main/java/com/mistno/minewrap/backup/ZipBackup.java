@@ -33,7 +33,7 @@ public class ZipBackup extends AbstractBackup {
 		System.out.println("Backup process started...");
 
 		String dateTimeString = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM).format(new Date()).replace(":", "").replace(" ", "_").replace("-", "");
-		File target = new File(Config.get("backup.zip.targetDir") + "/minewrap_backup_" + dateTimeString + ".7z");
+		File target = new File(Config.get("backup.zip.targetDir") + "/minewrap_backup_" + dateTimeString + ".zip");
 		Path source = Paths.get(Config.get("backup.zip.sourceDir"));
 		try {
 			validateSource(source);
