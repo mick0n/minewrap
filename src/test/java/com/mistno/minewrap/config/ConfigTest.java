@@ -3,8 +3,6 @@ package com.mistno.minewrap.config;
 import org.junit.*;
 import org.junit.rules.ExpectedException;
 
-import com.mistno.minewrap.config.Config;
-
 public class ConfigTest {
 
 	private static final String RANDOM_STRING = "bivNPiEWgf";

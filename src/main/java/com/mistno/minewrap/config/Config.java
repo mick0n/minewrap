@@ -7,8 +7,8 @@ public class Config {
 
 	protected static Properties properties = new Properties();
 
-	public static void initialize() throws IOException {
-		properties.load(new FileInputStream(new File("minewrap.properties")));
+	public static void initialize(InputStream inputStream) throws IOException {
+		properties.load(inputStream);
 		validateProperties();
 	}
 

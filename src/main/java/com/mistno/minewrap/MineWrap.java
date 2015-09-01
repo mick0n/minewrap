@@ -85,7 +85,7 @@ public class MineWrap {
 
 	public static void main(String[] args) {
 		try {
-			Config.initialize();
+			Config.initialize(new FileInputStream(new File("minewrap.properties")));
 			new MineWrap();
 		} catch (Exception e) {
 			e.printStackTrace();
