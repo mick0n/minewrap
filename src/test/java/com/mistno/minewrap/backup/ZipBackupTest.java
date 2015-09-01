@@ -17,6 +17,7 @@ public class ZipBackupTest {
     private static final String CONFIG = "server.jar=" + RANDOM_STRING + "\n"
             + "server.xmx=" + RANDOM_STRING + "\n"
             + "server.xms=" + RANDOM_STRING + "\n"
+            + "backup.interval=" + RANDOM_STRING + "\n"
             + "backup.zip.enabled=true\n"
             + "backup.zip.exclude=excluded_folder\n"
             + "backup.external.enabled=" + RANDOM_STRING + "\n"

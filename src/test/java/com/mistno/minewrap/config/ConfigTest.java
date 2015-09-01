@@ -1,69 +1,73 @@
 package com.mistno.minewrap.config;
 
-import org.junit.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 public class ConfigTest {
 
-	private static final String RANDOM_STRING = "bivNPiEWgf";
-	
-	@Rule
-	public ExpectedException expectedException = ExpectedException.none();
+    private static final String RANDOM_STRING = "bivNPiEWgf";
 
-	@Before
-	public void setupDefaults() {
-		Config.properties.setProperty("server.jar", RANDOM_STRING);
-		Config.properties.setProperty("server.xmx", RANDOM_STRING);
-		Config.properties.setProperty("server.xms", RANDOM_STRING);
-		Config.properties.setProperty("backup.zip.enabled", "true");
-		Config.properties.setProperty("backup.zip.sourceDir", RANDOM_STRING);
-		Config.properties.setProperty("backup.zip.exclude", RANDOM_STRING);
-		Config.properties.setProperty("backup.zip.targetDir", RANDOM_STRING);
-		Config.properties.setProperty("backup.external.enabled", "false");
-		Config.properties.setProperty("backup.external.path", "");
-	}
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
-	@Test
-	public void allPropertiesValid() throws Exception {
-		Config.validateProperties();
-	}
+    @Before
+    public void setupDefaults() {
+        Config.properties.setProperty("server.jar", RANDOM_STRING);
+        Config.properties.setProperty("server.xmx", RANDOM_STRING);
+        Config.properties.setProperty("server.xms", RANDOM_STRING);
+        Config.properties.setProperty("backup.interval", RANDOM_STRING);
+        Config.properties.setProperty("backup.zip.enabled", "true");
+        Config.properties.setProperty("backup.zip.sourceDir", RANDOM_STRING);
+        Config.properties.setProperty("backup.zip.exclude", RANDOM_STRING);
+        Config.properties.setProperty("backup.zip.targetDir", RANDOM_STRING);
+        Config.properties.setProperty("backup.external.enabled", "false");
+        Config.properties.setProperty("backup.external.path", "");
+    }
 
-	@Test
-	public void missingPropertyThrowsException() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("Missing the following property in minewrap.properties: server.jar");
+    @Test
+    public void allPropertiesValid() throws Exception {
+        Config.validateProperties();
+    }
 
-		Config.properties.remove("server.jar");
-		Config.validateProperties();
-	}
+    @Test
+    public void missingPropertyThrowsException() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Missing the following property in minewrap.properties: server.jar");
 
-	@Test
-	public void missingValueThrowsException() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("Missing value for property in minewrap.properties: server.jar");
+        Config.properties.remove("server.jar");
+        Config.validateProperties();
+    }
 
-		Config.properties.setProperty("server.jar", "");
-		Config.validateProperties();
-	}
-	
-	@Test
-	public void ignorePropertyIfDependentPropertyIsMissing() {
-		Config.properties.setProperty("backup.zip.enabled", "");
-		Config.properties.remove("backup.zip.sourceDir");
-		Config.validateProperties();
-	}
+    @Test
+    public void missingValueThrowsException() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Missing value for property in minewrap.properties: server.jar");
 
-	@Test
-	public void missingPropertyWithFulfilledDependencyThrowsException() {
-		expectedException.expect(IllegalArgumentException.class);
-		expectedException.expectMessage("Missing the following property in minewrap.properties: backup.zip.sourceDir");
+        Config.properties.setProperty("server.jar", "");
+        Config.validateProperties();
+    }
 
-		Config.properties.remove("backup.zip.sourceDir");
-		Config.validateProperties();
-	}
-	
-	@After
-	public void teardown() {
-		Config.properties.clear();
-	}
+    @Test
+    public void ignorePropertyIfDependentPropertyIsMissing() {
+        Config.properties.setProperty("backup.zip.enabled", "");
+        Config.properties.remove("backup.zip.sourceDir");
+        Config.validateProperties();
+    }
+
+    @Test
+    public void missingPropertyWithFulfilledDependencyThrowsException() {
+        expectedException.expect(IllegalArgumentException.class);
+        expectedException.expectMessage("Missing the following property in minewrap.properties: backup.zip.sourceDir");
+
+        Config.properties.remove("backup.zip.sourceDir");
+        Config.validateProperties();
+    }
+
+    @After
+    public void teardown() {
+        Config.properties.clear();
+    }
 }
